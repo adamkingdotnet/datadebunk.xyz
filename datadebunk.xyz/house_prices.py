@@ -68,7 +68,9 @@ def generate_price_plot():
         go.Scatter(x=yearly_data["year"], y=trendline, name='Trendline', line=dict(color='green', dash='dot'))
     )
 
-    fig.update_yaxes(title_text="<b>Price ($)</b>")
+    fig.update_yaxes(
+        title_text="<b>Price ($)</b>",
+        range=[0, max(yearly_data["price"]) + std_data])
     fig.update_xaxes(title_text="<b>Year</b>")
 
     latest_sign = "increase" if yearly_data["price"].iloc[-1] > yearly_data["price"].iloc[-2] else "decrease"
