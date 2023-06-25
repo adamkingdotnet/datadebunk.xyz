@@ -51,18 +51,12 @@ def generate_html():
             <a href="https://github.com/adamkingdotnet/datadebunk.xyz" target="_blank">my GitHub</a>. 
             I'll be updating the data on this site on a yearly basis once all the available data sets 
             have been updated.</p>
-            <br>
-            <br>
-            <br>
             <h2>Global Temperature Change</h2>
             {plot_html_temperature}
             <p>The latest change is {"an" if latest_sign_temperature == "increase" else "a"} {latest_sign_temperature} and it is {latest_significance_temperature} compared to last year.</p>
             <h2>House Price Change</h2>
             {plot_html_price}
             <p>The latest change is {"an" if latest_sign_price == "increase" else "a"} {latest_sign_price} and it is {latest_significance_price} compared to last year.</p>
-            <br>
-            <br>
-            <br>
             <hr>
             <div class="center">
                 <p>
