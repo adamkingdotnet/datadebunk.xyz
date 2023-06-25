@@ -55,6 +55,7 @@ def generate_html():
             {plot_html_temperature}
             <p>The latest change is {"an" if latest_sign_temperature == "increase" else "a"} {latest_sign_temperature} and it is {latest_significance_temperature} compared to last year.</p>
             <h2>House Price Change</h2>
+            <h3>Adjusted for Inflation</h3>
             {plot_html_price}
             <p>The latest change is {"an" if latest_sign_price == "increase" else "a"} {latest_sign_price} and it is {latest_significance_price} compared to last year.</p>
             <hr>
