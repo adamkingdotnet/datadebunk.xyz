@@ -59,6 +59,12 @@ def generate_temperature_plot():
     fig.update_yaxes(title_text="<b>Temperature (℃)</b>")
     fig.update_xaxes(title_text="<b>Year</b>")
 
+    fig.update_layout(
+        {
+            "dragmode": False,
+        }
+    )
+
     latest_sign = "increase" if data["J-D"].iloc[-1] > data["J-D"].iloc[-2] else "decrease"
     latest_significance = "significant" if abs(
         data["J-D"].iloc[-1] - data["J-D"].iloc[-2]) > std_data else "not significant"

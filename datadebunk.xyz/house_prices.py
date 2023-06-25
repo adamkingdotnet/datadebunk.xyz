@@ -73,6 +73,12 @@ def generate_price_plot():
         range=[0, max(yearly_data["price"]) + std_data])
     fig.update_xaxes(title_text="<b>Year</b>")
 
+    fig.update_layout(
+        {
+            "dragmode": False,
+        }
+    )
+
     latest_sign = "increase" if yearly_data["price"].iloc[-1] > yearly_data["price"].iloc[-2] else "decrease"
     latest_significance = "significant" if abs(
         yearly_data["price"].iloc[-1] - yearly_data["price"].iloc[-2]) > std_data else "not significant"
