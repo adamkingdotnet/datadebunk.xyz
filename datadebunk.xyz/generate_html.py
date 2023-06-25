@@ -57,6 +57,7 @@ def generate_html():
         <html>
         <head>
             <title>DataDebunk.xyz</title>
+            <meta property="og:title" content="DataDebunk.xyz">
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
                 body {{
