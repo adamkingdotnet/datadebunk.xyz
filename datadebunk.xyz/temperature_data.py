@@ -32,8 +32,20 @@ def generate_temperature_plot():
         go.Scatter(x=data["Year"], y=data["J-D"], name='Data', line=dict(color='royalblue'))
     )
 
-    mean_data = np.mean(data["J-D"][:-1])  # Exclude the last data point
-    std_data = np.std(data["J-D"][:-1])  # Exclude the last data point
+    std_data = np.std(data["J-D"])
+
+    fig.add_trace(
+        go.Scatter(x=data["Year"], y=data["J-D"] + std_data, line=dict(width=0), showlegend=False)
+    )
+
+    fig.add_trace(
+        go.Scatter(x=data["Year"], y=data["J-D"] - std_data, name='Std. Dev.', line=dict(width=0),
+                   fillcolor='rgba(225, 100, 100, 0.2)', fill='tonexty', showlegend=True)
+    )
+
+    mean_data = np.mean(data["J-D"])
+    slope, intercept, r_value, p_value, std_err = linregress(data["Year"], data["J-D"])
+    trendline = slope * np.array(data["Year"]) + intercept
 
     fig.add_trace(
         go.Scatter(x=data["Year"], y=[mean_data] * len(data["Year"]), name='Average',
@@ -41,22 +53,11 @@ def generate_temperature_plot():
     )
 
     fig.add_trace(
-        go.Scatter(x=data["Year"], y=[mean_data + std_data] * len(data["Year"]), line=dict(width=0), showlegend=False)
-    )
-
-    fig.add_trace(
-        go.Scatter(x=data["Year"], y=[mean_data - std_data] * len(data["Year"]), name='Std. Dev.', line=dict(width=0),
-                   fillcolor='rgba(225, 100, 100, 0.2)', fill='tonexty', showlegend=True)
-    )
-
-    slope, intercept, r_value, p_value, std_err = linregress(data["Year"], data["J-D"])
-    trendline = slope * np.array(data["Year"]) + intercept
-
-    fig.add_trace(
         go.Scatter(x=data["Year"], y=trendline, name='Trendline', line=dict(color='green', dash='dot'))
     )
 
-    fig.update_yaxes(title_text="<b>Temperature (℃)</b>")
+    fig.update_yaxes(title_text="<b>Temperature (℃)</b>",
+                     range=[min(data["J-D"] - std_data), max(data["J-D"] + std_data)])
     fig.update_xaxes(title_text="<b>Year</b>")
 
     fig.update_layout(

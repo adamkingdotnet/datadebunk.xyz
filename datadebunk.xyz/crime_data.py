@@ -38,11 +38,11 @@ def generate_crime_plot():
     )
 
     fig.add_trace(
-        go.Scatter(x=year, y=[mean_data + std_data] * len(year), line=dict(width=0), showlegend=False)
+        go.Scatter(x=year, y=incidents + std_data, line=dict(width=0), showlegend=False)
     )
 
     fig.add_trace(
-        go.Scatter(x=year, y=[mean_data - std_data] * len(year), name='Std. Dev.', line=dict(width=0),
+        go.Scatter(x=year, y=incidents - std_data, name='Std. Dev.', line=dict(width=0),
                    fillcolor='rgba(225, 100, 100, 0.2)', fill='tonexty', showlegend=True)
     )
 
@@ -55,7 +55,7 @@ def generate_crime_plot():
 
     fig.update_yaxes(
         title_text="<b>Incidents of Crime per 100k People</b>",
-        range=[0, max(incidents) + std_data])
+        range=[min(incidents - std_data), max(incidents) + std_data])
     fig.update_xaxes(title_text="<b>Year</b>")
 
     fig.update_layout(
