@@ -55,7 +55,7 @@ def generate_crime_plot():
 
     fig.update_yaxes(
         title_text="<b>Incidents of Crime per 100k People</b>",
-        range=[min(incidents - std_data), max(incidents) + std_data])
+        range=[0, max(incidents) + std_data])
     fig.update_xaxes(title_text="<b>Year</b>")
 
     fig.update_layout(

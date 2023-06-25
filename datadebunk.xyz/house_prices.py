@@ -70,7 +70,7 @@ def generate_price_plot():
 
     fig.update_yaxes(
         title_text="<b>Price ($)</b>",
-        range=[min(yearly_data["price"] - std_data), max(yearly_data["price"] + std_data)])
+        range=[0, max(yearly_data["price"] + std_data)])
     fig.update_xaxes(title_text="<b>Year</b>")
 
     fig.update_layout(
