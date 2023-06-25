@@ -56,7 +56,7 @@ def generate_temperature_plot():
         go.Scatter(x=data["Year"], y=trendline, name='Trendline', line=dict(color='green', dash='dot'))
     )
 
-    fig.update_yaxes(title_text="<b>Global Average Temperature (℃)</b>")
+    fig.update_yaxes(title_text="<b>Temperature (℃)</b>")
     fig.update_xaxes(title_text="<b>Year</b>")
 
     latest_sign = "increase" if data["J-D"].iloc[-1] > data["J-D"].iloc[-2] else "decrease"
