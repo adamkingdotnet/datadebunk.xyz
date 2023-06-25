@@ -2,11 +2,15 @@
 
 from temperature_data import generate_temperature_plot
 from house_prices import generate_price_plot
+from crime_data import generate_crime_plot
+
 
 
 def generate_html():
     fig_temperature, latest_sign_temperature, latest_significance_temperature = generate_temperature_plot()
     fig_price, latest_sign_price, latest_significance_price = generate_price_plot()
+    fig_crime, latest_sign_crime, latest_significance_crime = generate_crime_plot()
+
 
     # Add annotation to temperature prices plot
     fig_temperature.add_annotation(
@@ -30,9 +34,21 @@ def generate_html():
         font=dict(size=10)
     )
 
+    # Add annotation to crime plot
+    fig_crime.add_annotation(
+        x=0.5,
+        y=-0.2,
+        xref="paper",
+        yref="paper",
+        text="Source: <a href='https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend' target='_blank'>FBI</a>",
+        showarrow=False,
+        font=dict(size=10)
+    )
+
     # Convert the plotly figures to HTML strings
     plot_html_temperature = fig_temperature.to_html(include_plotlyjs='cdn', full_html=False)
     plot_html_price = fig_price.to_html(include_plotlyjs='cdn', full_html=False)
+    plot_html_crime = fig_crime.to_html(include_plotlyjs='cdn', full_html=False)
 
     # Write the HTML strings to a file
     with open("../docs/index.html", "w") as file:
@@ -99,6 +115,15 @@ def generate_html():
             <h3>Adjusted for Inflation</h3>
             {plot_html_price}
             <p>The latest change is {"an" if latest_sign_price == "increase" else "a"} {latest_sign_price} and it is {latest_significance_price} compared to last year.</p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h2>Crime Incidents per Capita, United States</h2>
+            {plot_html_crime}
+            <p>The latest change is {"an" if latest_sign_crime == "increase" else "a"} {latest_sign_crime} and it is {latest_significance_crime} compared to last year.</p>
+            <br>
+            <br>
             <br>
             <br>
             <hr>
