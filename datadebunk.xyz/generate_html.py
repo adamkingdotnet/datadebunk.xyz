@@ -12,7 +12,7 @@ def generate_html():
     plot_html_price = fig_price.to_html(include_plotlyjs='cdn', full_html=False)
 
     # Write the HTML strings to a file
-    with open("main.html", "w") as file:
+    with open("../index.html", "w") as file:
         file.write(f"""
         <!DOCTYPE html>
         <html>
