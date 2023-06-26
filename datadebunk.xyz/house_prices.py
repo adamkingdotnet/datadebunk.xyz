@@ -44,27 +44,8 @@ def generate_price_plot():
 
     fig.add_trace(go.Scatter(x=yearly_data["year"], y=yearly_data["price"], name="Data", line=dict(color="royalblue")))
 
-    std_data = np.std(yearly_data["price"])
-
-    fig.add_trace(
-        go.Scatter(x=yearly_data["year"], y=yearly_data["price"] + std_data, line=dict(width=0), showlegend=False)
-    )
-
-    fig.add_trace(
-        go.Scatter(
-            x=yearly_data["year"],
-            y=yearly_data["price"] - std_data,
-            name="Std. Dev.",
-            line=dict(width=0),
-            fillcolor="rgba(225, 100, 100, 0.2)",
-            fill="tonexty",
-            showlegend=True,
-        )
-    )
-
-    mean_data = np.mean(yearly_data["price"])
-    slope, intercept, r_value, p_value, std_err = linregress(yearly_data.index, yearly_data["price"])
-    trendline = slope * np.array(yearly_data.index) + intercept
+    mean_data = np.mean(yearly_data["price"][:-1])  # Exclude the last data point
+    std_data = np.std(yearly_data["price"][:-1])  # Exclude the last data point
 
     fig.add_trace(
         go.Scatter(
@@ -76,10 +57,25 @@ def generate_price_plot():
     )
 
     fig.add_trace(
-        go.Scatter(x=yearly_data["year"], y=trendline, name="Trendline", line=dict(color="green", dash="dot"))
+
+        go.Scatter(x=yearly_data["year"], y=[mean_data + std_data] * len(yearly_data["year"]), line=dict(width=0), showlegend=False)
     )
 
-    fig.update_yaxes(title_text="<b>Price ($)</b>", range=[0, max(yearly_data["price"] + std_data)])
+    fig.add_trace(
+        go.Scatter(x=yearly_data["year"], y=[mean_data - std_data] * len(yearly_data["year"]), name='Std. Dev.', line=dict(width=0),
+                   fillcolor='rgba(225, 100, 100, 0.2)', fill='tonexty', showlegend=True)
+    )
+
+    slope, intercept, r_value, p_value, std_err = linregress(yearly_data.index, yearly_data["price"])
+    trendline = slope * np.array(yearly_data.index) + intercept
+
+    fig.add_trace(
+        go.Scatter(x=yearly_data["year"], y=trendline, name='Trendline', line=dict(color='green', dash='dot'))
+    )
+
+    fig.update_yaxes(
+        title_text="<b>Price ($)</b>",
+        range=[0, max(yearly_data["price"]) + std_data])
     fig.update_xaxes(title_text="<b>Year</b>")
 
     fig.update_layout(
