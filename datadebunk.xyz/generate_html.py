@@ -5,20 +5,20 @@ from house_prices import generate_price_plot
 from crime_data import generate_crime_plot
 
 
-
 def generate_html():
     fig_temperature, latest_sign_temperature, latest_significance_temperature = generate_temperature_plot()
     fig_price, latest_sign_price, latest_significance_price = generate_price_plot()
     fig_crime, latest_sign_crime, latest_significance_crime = generate_crime_plot()
 
     # Convert the plotly figures to HTML strings
-    plot_html_temperature = fig_temperature.to_html(include_plotlyjs='cdn', full_html=False)
-    plot_html_price = fig_price.to_html(include_plotlyjs='cdn', full_html=False)
-    plot_html_crime = fig_crime.to_html(include_plotlyjs='cdn', full_html=False)
+    plot_html_temperature = fig_temperature.to_html(include_plotlyjs="cdn", full_html=False)
+    plot_html_price = fig_price.to_html(include_plotlyjs="cdn", full_html=False)
+    plot_html_crime = fig_crime.to_html(include_plotlyjs="cdn", full_html=False)
 
     # Write the HTML strings to a file
     with open("../docs/index.html", "w") as file:
-        file.write(f"""
+        file.write(
+            f"""
         <!DOCTYPE html>
         <html>
         <head>
@@ -133,7 +133,8 @@ def generate_html():
             <br>
         </body>
         </html>
-        """)
+        """
+        )
 
 
 if __name__ == "__main__":
