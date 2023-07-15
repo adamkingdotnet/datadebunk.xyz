@@ -74,7 +74,7 @@ def generate_html():
                 <p>In particular, there is a propensity for these individuals to compare only two data 
                 points without providing context or information on variance. This approach can lead to 
                 erroneous conclusions. As Donald J. Wheeler puts it in his book, <em><a target="_blank" href="https://www.amazon.com/Understanding-Variation-Key-Managing-Chaos/dp/0945320531/?&_encoding=UTF8&tag=atomking-20&linkCode=ur2&linkId=4f18041b0c48877fc210971407a2d76d&camp=1789&creative=9325">Understanding Variation</a>:
-                The Key to Managing Chaos</em>, such comparisons are "limited because of the amount 
+                The Key to Managing Chaos</em><sup>[1]</sup>, such comparisons are "limited because of the amount 
                 of data used, ..., and weak because both of the numbers are subject to variation."</p>
 
                 <p>The code behind these analyses is completely open-source. Feel free to explore it on 
@@ -130,6 +130,9 @@ def generate_html():
             <br>
             <br>
             <br>
+            <p>
+            [1] - As an Amazon Associate I earn from qualifying purchases.
+            </p>
         </body>
         </html>
         """
